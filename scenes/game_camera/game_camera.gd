@@ -12,7 +12,7 @@ func _process(delta: float) -> void:
 	acquire_target()
 	
 	# Smoothing camera movement to player
-	var lerp_weight = 1.0 - exp(-delta * 10)
+	var lerp_weight = 1.0 - exp(-delta * 20)
 	global_position = global_position.lerp(target_position, lerp_weight)
 	
 	

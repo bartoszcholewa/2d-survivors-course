@@ -3,6 +3,7 @@ extends Node
 const MAX_RANGE = 150
 
 @export var sword_ability: PackedScene
+var damage = 5
 
 # Cache the player reference
 var player: Node2D
@@ -46,10 +47,13 @@ func on_timer_timeout():
 		print("Sword ability not found in on_timer_timeout()")
 	
 	# Create new sword instance
-	var sword_instance: Node2D = sword_ability.instantiate()
+	var sword_instance: SwordAbility = sword_ability.instantiate()
 
 	# Add sword to scene
 	player.get_parent().add_child(sword_instance)
+	
+	# Assign damage
+	sword_instance.hitbox_component.damage = damage
 	
 	# Set sword position to closest enemy
 	sword_instance.global_position = enemies[0].global_position

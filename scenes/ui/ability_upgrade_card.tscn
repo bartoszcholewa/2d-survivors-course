@@ -1,21 +1,64 @@
-[gd_scene load_steps=2 format=3 uid="uid://b4pimyu7ia77u"]
+[gd_scene load_steps=6 format=3 uid="uid://b4pimyu7ia77u"]
 
 [ext_resource type="Script" uid="uid://deh3n6mu7hvu3" path="res://scenes/ui/ability_upgrade_card.gd" id="1_8ur3e"]
+[ext_resource type="FontFile" uid="uid://dt3j26xjl5eod" path="res://assets/font.ttf" id="2_m44y0"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m44y0"]
+bg_color = Color(0.32156864, 0.3764706, 0.4862745, 1)
+border_width_left = 4
+border_width_top = 4
+border_width_right = 4
+border_width_bottom = 4
+border_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+
+[sub_resource type="FontVariation" id="FontVariation_c4j7u"]
+base_font = ExtResource("2_m44y0")
+spacing_top = -4
+
+[sub_resource type="FontVariation" id="FontVariation_m44y0"]
+base_font = ExtResource("2_m44y0")
 
 [node name="AbilityUpgradeCard" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 150)
+theme_override_styles/panel = SubResource("StyleBoxFlat_m44y0")
 script = ExtResource("1_8ur3e")
 
-[node name="VBoxContainer" type="VBoxContainer" parent="."]
+[node name="MarginContainer" type="MarginContainer" parent="."]
 layout_mode = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
 
-[node name="NameLabel" type="Label" parent="VBoxContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+alignment = 1
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Test"
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_c4j7u")
+theme_override_font_sizes/font_size = 22
+text = "Sword Speed"
+horizontal_alignment = 1
+autowrap_mode = 2
 
-[node name="DescriptionLabel" type="Label" parent="VBoxContainer"]
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-text = "Write some description here"
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_m44y0")
+theme_override_font_sizes/font_size = 11
+text = "Increases sword attack rate by 10%."
+horizontal_alignment = 1
 autowrap_mode = 2

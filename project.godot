@@ -43,6 +43,11 @@ enemy=""
 entities_layer=""
 foreground_layer=""
 
+[gui]
+
+theme/default_font_antialiasing=0
+theme/default_font_multichannel_signed_distance_field=true
+
 [input]
 
 move_left={
@@ -86,3 +91,4 @@ left_click={
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0
+anti_aliasing/screen_space_roughness_limiter/enabled=false

@@ -53,6 +53,6 @@ func _spawn_enemy() -> void:
 	var enemy: Node2D = basic_enemy_scene.instantiate() as Node2D
 	
 	# Adding to parent to avoid enemy moving along with the spawner's local transform
-	get_parent().add_child(enemy)
+	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+	entities_layer.add_child(enemy)
 	enemy.global_position = spawn_position
-	

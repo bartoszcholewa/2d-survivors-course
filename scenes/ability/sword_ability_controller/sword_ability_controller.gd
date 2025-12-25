@@ -57,7 +57,8 @@ func on_timer_timeout():
 	var sword_instance: SwordAbility = sword_ability.instantiate()
 
 	# Add sword to scene
-	player.get_parent().add_child(sword_instance)
+	var foreground_layer = get_tree().get_first_node_in_group("foreground_layer")
+	foreground_layer.add_child(sword_instance)
 	
 	# Assign damage
 	sword_instance.hitbox_component.damage = damage
@@ -86,5 +87,3 @@ func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Diction
 	
 	# Restart timer with new wait time value
 	$Timer.start()
-	
-	print($Timer.wait_time)

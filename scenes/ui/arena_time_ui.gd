@@ -7,8 +7,9 @@ extends CanvasLayer
 func _process(delta: float) -> void:
 	if arena_time_manager == null:
 		return
-	var time_elapsed = arena_time_manager.get_time_elapsed()
-	label.text = format_seconds_to_string(time_elapsed)
+	# var time_elapsed = arena_time_manager.get_time_elapsed()
+	# label.text = format_seconds_to_string(time_elapsed)
+	label.text = format_seconds_to_string(arena_time_manager.timer.time_left)
 
 
 func format_seconds_to_string(seconds: float) -> String:

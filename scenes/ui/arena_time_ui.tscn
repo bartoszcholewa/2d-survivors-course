@@ -1,6 +1,11 @@
-[gd_scene load_steps=2 format=3 uid="uid://cauh5xc1b8tb4"]
+[gd_scene load_steps=4 format=3 uid="uid://cauh5xc1b8tb4"]
 
 [ext_resource type="Script" uid="uid://de47ju7jc1jeu" path="res://scenes/ui/arena_time_ui.gd" id="1_oa7xr"]
+[ext_resource type="FontFile" uid="uid://dt3j26xjl5eod" path="res://assets/font.ttf" id="2_j8dh0"]
+
+[sub_resource type="FontVariation" id="FontVariation_ur7nr"]
+base_font = ExtResource("2_j8dh0")
+spacing_glyph = 2
 
 [node name="ArenaTimeUI" type="CanvasLayer"]
 script = ExtResource("1_oa7xr")
@@ -19,4 +24,13 @@ unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 0
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/line_spacing = 0
+theme_override_constants/shadow_offset_x = 0
+theme_override_constants/shadow_offset_y = 0
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_fonts/font = SubResource("FontVariation_ur7nr")
+theme_override_font_sizes/font_size = 11
 text = "0:59"

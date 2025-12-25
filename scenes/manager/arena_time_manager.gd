@@ -24,6 +24,7 @@ func _process(delta: float) -> void:
 
 func get_time_elapsed():
 	return timer.wait_time - timer.time_left
+	
 
 
 func on_timer_timeout():

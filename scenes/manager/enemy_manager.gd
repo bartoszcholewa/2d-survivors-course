@@ -60,11 +60,34 @@ func _on_timer_timeout() -> void:
 	_spawn_enemy()
 
 
+func _get_spawn_position() -> Vector2:
+	
+	var spawn_position: Vector2 = Vector2.ZERO
+	var random_direction: Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU))
+	
+	for i in 4:
+		# Calculate a random position on the circle circumference
+		spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
+		
+		# Ray cast query - shoot ray from player position to dedicated enemy spawn
+		# position and return dictionary with all collisions.
+		var query_parameters = PhysicsRayQueryParameters2D.create(
+			player.global_position, spawn_position, 1
+		)
+		var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_parameters)
+	
+		if result.is_empty():
+			# Break the loop if no collision found
+			break
+		else:
+			# Set new direction by rotating by 90 deg and try again
+			random_direction = random_direction.rotated(deg_to_rad(90))
+	
+	return spawn_position
+
 ## Handles the instantiation and positioning of the enemy.
 func _spawn_enemy() -> void:
-	# Calculate a random position on the circle circumference
-	var random_direction: Vector2 = Vector2.RIGHT.rotated(randf_range(0, TAU))
-	var spawn_position: Vector2 = player.global_position + (random_direction * SPAWN_RADIUS)
+
 	
 	# Instantiate and add to the scene tree
 	var enemy: Node2D = basic_enemy_scene.instantiate() as Node2D
@@ -72,7 +95,7 @@ func _spawn_enemy() -> void:
 	# Adding to parent to avoid enemy moving along with the spawner's local transform
 	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
 	entities_layer.add_child(enemy)
-	enemy.global_position = spawn_position
+	enemy.global_position = _get_spawn_position()
 
 
 func _on_arena_difficulty_increased(arena_difficulty: int):
@@ -83,4 +106,7 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 	
 	print("time_off: ", time_off)
 	timer.wait_time = base_spawn_time - time_off
+	
+	
+
 	

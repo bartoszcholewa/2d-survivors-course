@@ -54,7 +54,6 @@ value = 0.5
 show_percentage = false
 
 [node name="PickupArea2D" type="Area2D" parent="."]
-visible = false
 position = Vector2(0, -5)
 collision_layer = 16
 collision_mask = 0
@@ -63,7 +62,6 @@ collision_mask = 0
 shape = SubResource("CircleShape2D_s3670")
 
 [node name="CollistionArea2D" type="Area2D" parent="."]
-visible = false
 collision_layer = 0
 collision_mask = 8
 
@@ -76,6 +74,5 @@ texture = ExtResource("1_8afob")
 offset = Vector2(0, -8)
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
-visible = false
 position = Vector2(0, -5)
 shape = SubResource("CircleShape2D_dovo2")

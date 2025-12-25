@@ -3,7 +3,9 @@ extends Node
 const MAX_RANGE = 150
 
 @export var sword_ability: PackedScene
+
 var damage = 5
+var base_wait_time
 
 # Cache the player reference
 var player: Node2D
@@ -13,8 +15,13 @@ func _ready() -> void:
 	# Update player cache
 	player = get_tree().get_first_node_in_group("player")
 	
+	# Set base wait time for sword attack
+	base_wait_time = $Timer.wait_time
+	
 	# Listen to a signal
 	$Timer.timeout.connect(on_timer_timeout)
+	
+	GameEvents.ability_upgrade_added.connect(on_ability_upgrade_added)
 
 func on_timer_timeout():
 	# Get player node
@@ -64,3 +71,20 @@ func on_timer_timeout():
 	# Point sword animation toward enemy
 	var enemy_direction = enemies[0].global_position - sword_instance.global_position
 	sword_instance.rotation = enemy_direction.angle()
+
+
+func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):
+	# Check if upgrade is for sword rate
+	if upgrade.id != "sword_rate":
+		return
+	
+	# Get how many sword rate upgrades player has and make each one as 10% reduction
+	var percent_reduction = current_upgrades["sword_rate"]["quantity"] * 0.1
+	
+	# Reduce sword rate timer by percent
+	$Timer.wait_time = base_wait_time * (1 - percent_reduction)
+	
+	# Restart timer with new wait time value
+	$Timer.start()
+	
+	print($Timer.wait_time)

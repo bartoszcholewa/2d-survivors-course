@@ -47,6 +47,7 @@ foreground_layer=""
 
 theme/default_font_antialiasing=0
 theme/default_font_multichannel_signed_distance_field=true
+theme/custom="uid://b78n3sfwv2a3g"
 
 [input]
 

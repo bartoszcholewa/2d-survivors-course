@@ -3,17 +3,17 @@
 importer="font_data_dynamic"
 type="FontFile"
 uid="uid://dt3j26xjl5eod"
-path="res://.godot/imported/font.ttf-976a98412f76666fef587cd4874204ca.fontdata"
+path="res://.godot/imported/font.ttf-8e25b6bd5e7255c9fa2504d00fb33e67.fontdata"
 
 [deps]
 
-source_file="res://assets/font.ttf"
-dest_files=["res://.godot/imported/font.ttf-976a98412f76666fef587cd4874204ca.fontdata"]
+source_file="res://resources/theme/font.ttf"
+dest_files=["res://.godot/imported/font.ttf-8e25b6bd5e7255c9fa2504d00fb33e67.fontdata"]
 
 [params]
 
 Rendering=null
-antialiasing=1
+antialiasing=0
 generate_mipmaps=false
 disable_embedded_bitmaps=true
 multichannel_signed_distance_field=false
@@ -22,15 +22,20 @@ msdf_size=48
 allow_system_fallback=true
 force_autohinter=false
 modulate_color_glyphs=false
-hinting=1
-subpixel_positioning=4
+hinting=0
+subpixel_positioning=0
 keep_rounding_remainders=true
 oversampling=0.0
 Fallbacks=null
 fallbacks=[]
 Compress=null
 compress=true
-preload=[]
+preload=[{
+"chars": [],
+"glyphs": [],
+"name": "New Configuration",
+"size": Vector2i(16, 0)
+}]
 language_support={}
 script_support={}
 opentype_features={}

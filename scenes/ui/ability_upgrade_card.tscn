@@ -1,18 +1,9 @@
-[gd_scene load_steps=3 format=3 uid="uid://b4pimyu7ia77u"]
+[gd_scene load_steps=2 format=3 uid="uid://b4pimyu7ia77u"]
 
 [ext_resource type="Script" uid="uid://deh3n6mu7hvu3" path="res://scenes/ui/ability_upgrade_card.gd" id="1_8ur3e"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_m44y0"]
-bg_color = Color(0.32156864, 0.3764706, 0.4862745, 1)
-border_width_left = 4
-border_width_top = 4
-border_width_right = 4
-border_width_bottom = 4
-border_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
-
 [node name="AbilityUpgradeCard" type="PanelContainer"]
 custom_minimum_size = Vector2(120, 150)
-theme_override_styles/panel = SubResource("StyleBoxFlat_m44y0")
 script = ExtResource("1_8ur3e")
 
 [node name="MarginContainer" type="MarginContainer" parent="."]

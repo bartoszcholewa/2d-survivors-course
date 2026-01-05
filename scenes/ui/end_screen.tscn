@@ -1,18 +1,80 @@
-[gd_scene load_steps=3 format=3 uid="uid://cj38gilyogc67"]
+[gd_scene load_steps=6 format=3 uid="uid://cj38gilyogc67"]
 
 [ext_resource type="Script" uid="uid://cqi7gqpgjygoq" path="res://scenes/ui/end_screen.gd" id="1_4ttpn"]
 
-[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_n8r4t"]
-bg_color = Color(0.32156864, 0.3764706, 0.4862745, 1)
-border_width_left = 8
-border_width_top = 8
-border_width_right = 8
-border_width_bottom = 8
-border_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+[sub_resource type="Animation" id="Animation_bd1lb"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_eg2gl"]
+resource_name = "in"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 0), Color(1, 1, 1, 1)]
+}
+
+[sub_resource type="Animation" id="Animation_xpnye"]
+resource_name = "out"
+length = 0.15
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath("ColorRect:modulate")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.15),
+"transitions": PackedFloat32Array(1, 1),
+"update": 0,
+"values": [Color(1, 1, 1, 1), Color(1, 1, 1, 0)]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_k541j"]
+_data = {
+&"RESET": SubResource("Animation_bd1lb"),
+&"in": SubResource("Animation_eg2gl"),
+&"out": SubResource("Animation_xpnye")
+}
 
 [node name="EndScreen" type="CanvasLayer"]
 process_mode = 3
 script = ExtResource("1_4ttpn")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_k541j")
+}
+autoplay = "in"
+
+[node name="ColorRect" type="ColorRect" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+color = Color(0.60784316, 0.29803923, 0.6392157, 0.3529412)
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
 anchors_preset = 15
@@ -20,14 +82,13 @@ anchor_right = 1.0
 anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
-scale = Vector2(0.5, 0.5)
 pivot_offset = Vector2(320, 160)
 
 [node name="PanelContainer" type="PanelContainer" parent="MarginContainer"]
+unique_name_in_owner = true
 layout_mode = 2
 size_flags_horizontal = 4
 size_flags_vertical = 4
-theme_override_styles/panel = SubResource("StyleBoxFlat_n8r4t")
 
 [node name="MarginContainer" type="MarginContainer" parent="MarginContainer/PanelContainer"]
 custom_minimum_size = Vector2(180, 0)
@@ -39,12 +100,18 @@ theme_override_constants/margin_bottom = 16
 
 [node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/PanelContainer/MarginContainer"]
 layout_mode = 2
+theme_override_constants/separation = 8
 alignment = 1
 
 [node name="TitleLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 44
+theme_override_colors/font_shadow_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+theme_override_colors/font_outline_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 8
+theme_override_font_sizes/font_size = 22
 text = "VICTORY"
 horizontal_alignment = 1
 vertical_alignment = 1
@@ -52,21 +119,22 @@ vertical_alignment = 1
 [node name="DescriptionLabel" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_colors/font_shadow_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+theme_override_colors/font_outline_color = Color(0.14901961, 0.16862746, 0.26666668, 1)
+theme_override_constants/shadow_offset_x = 1
+theme_override_constants/shadow_offset_y = 1
+theme_override_constants/outline_size = 8
 text = "You won!"
 horizontal_alignment = 1
-
-[node name="Spacer" type="Label" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
-layout_mode = 2
 
 [node name="RestartButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 12
 text = "RESTART"
 
 [node name="QuitButton" type="Button" parent="MarginContainer/PanelContainer/MarginContainer/VBoxContainer"]
 unique_name_in_owner = true
 layout_mode = 2
-theme_override_font_sizes/font_size = 22
+theme_override_font_sizes/font_size = 12
 text = "QUIT"

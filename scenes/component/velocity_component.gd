@@ -3,24 +3,24 @@ extends Node
 @export var max_speed: int = 40
 @export var acceleration: float = 5
 
-var velocity = Vector2.ZERO
+var velocity: Vector2 = Vector2.ZERO
 
 
 func accelerate_to_player():
-	var owner_node2d = owner as Node2D
+	var owner_node2d: Node2D = owner
 	if not owner_node2d:
 		return
 	
-	var player = get_tree().get_first_node_in_group("player") as Node2D
+	var player: Node2D = get_tree().get_first_node_in_group("player")
 	if not player:
 		return
 	
-	var direction = (player.global_position - owner_node2d.global_position).normalized()
+	var direction: Vector2 = (player.global_position - owner_node2d.global_position).normalized()
 	accelerate_in_direction(direction)
 	
 
 func accelerate_in_direction(direction: Vector2):
-	var desired_velocity = direction * max_speed
+	var desired_velocity: Vector2 = direction * max_speed
 	velocity = velocity.lerp(desired_velocity, 1 - exp(-acceleration * get_process_delta_time()))
 	
 

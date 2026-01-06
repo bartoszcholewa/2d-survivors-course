@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="2DSurvivorsCourse"
-run/main_scene="uid://benw14owfpkv4"
+run/main_scene="uid://dcyljf6r87h74"
 config/features=PackedStringArray("4.5", "Forward Plus")
 config/icon="res://icon.svg"
 

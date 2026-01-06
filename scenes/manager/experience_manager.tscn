@@ -1,6 +1,15 @@
-[gd_scene load_steps=2 format=3 uid="uid://s47cg22f5pwx"]
+[gd_scene load_steps=8 format=3 uid="uid://s47cg22f5pwx"]
 
 [ext_resource type="Script" uid="uid://3cdip1evbjh3" path="res://scenes/manager/experience_manager.gd" id="1_6uta1"]
+[ext_resource type="PackedScene" uid="uid://xvuquvvaxsw" path="res://scenes/component/random_stream_player_component.tscn" id="2_f5s7v"]
+[ext_resource type="AudioStream" uid="uid://crwql088dlwhc" path="res://assets/audio/impactGeneric_light_000.ogg" id="3_4ui2y"]
+[ext_resource type="AudioStream" uid="uid://muwg4iypgftr" path="res://assets/audio/impactGeneric_light_001.ogg" id="4_gt67g"]
+[ext_resource type="AudioStream" uid="uid://bbu1u54625ey7" path="res://assets/audio/impactGeneric_light_002.ogg" id="5_67re6"]
+[ext_resource type="AudioStream" uid="uid://bmgtfwrl0ffbo" path="res://assets/audio/impactGeneric_light_003.ogg" id="6_0186a"]
+[ext_resource type="AudioStream" uid="uid://bidctt8suwlmb" path="res://assets/audio/impactGeneric_light_004.ogg" id="7_vknja"]
 
 [node name="ExperienceManager" type="Node"]
 script = ExtResource("1_6uta1")
+
+[node name="RandomStreamPlayerComponent" parent="." instance=ExtResource("2_f5s7v")]
+streams = Array[AudioStream]([ExtResource("3_4ui2y"), ExtResource("4_gt67g"), ExtResource("5_67re6"), ExtResource("6_0186a"), ExtResource("7_vknja")])

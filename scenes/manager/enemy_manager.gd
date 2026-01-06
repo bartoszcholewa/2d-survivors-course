@@ -109,7 +109,6 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 	# Dont go below 0.7s reduction (max 0.3s spawn time)
 	time_off = min(time_off, 0.7)
 	
-	print("time_off: ", time_off)
 	timer.wait_time = base_spawn_time - time_off
 	
 	if arena_difficulty == 6:

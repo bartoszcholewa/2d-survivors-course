@@ -6,6 +6,7 @@
 [ext_resource type="PackedScene" uid="uid://dlpv2kv3wgxfy" path="res://scenes/ui/sound_button.tscn" id="3_0ejsc"]
 
 [node name="OptionsMenu" type="CanvasLayer"]
+layer = 2
 script = ExtResource("1_imaij")
 
 [node name="TileMapLayer" type="TileMapLayer" parent="."]
@@ -102,3 +103,4 @@ text = "Back
 "
 
 [node name="Vignette" parent="." instance=ExtResource("2_0ejsc")]
+layer = 3

@@ -12,6 +12,7 @@ var level_up_instance: Node
 
 
 func _ready() -> void:
+	$LevelUpStreamPlayer.play()
 	level_up_instance = level_up_scene.instantiate()
 	get_tree().paused = true
 

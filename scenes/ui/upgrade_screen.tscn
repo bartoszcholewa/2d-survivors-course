@@ -1,8 +1,9 @@
-[gd_scene load_steps=8 format=3 uid="uid://b3i77apfhei6x"]
+[gd_scene load_steps=9 format=3 uid="uid://b3i77apfhei6x"]
 
 [ext_resource type="Script" uid="uid://cl7o33rtbspli" path="res://scenes/ui/upgrade_screen.gd" id="1_eg2gl"]
 [ext_resource type="PackedScene" uid="uid://b4pimyu7ia77u" path="res://scenes/ui/ability_upgrade_card.tscn" id="2_bd1lb"]
 [ext_resource type="PackedScene" uid="uid://bs0cihoecuh12" path="res://scenes/ui/level_up_label.tscn" id="3_bd1lb"]
+[ext_resource type="AudioStream" uid="uid://deeyxmg5474x8" path="res://assets/audio/jingles_levelup.ogg" id="4_xpnye"]
 
 [sub_resource type="Animation" id="Animation_bd1lb"]
 length = 0.001
@@ -71,6 +72,11 @@ libraries = {
 &"": SubResource("AnimationLibrary_k541j")
 }
 autoplay = "in"
+
+[node name="LevelUpStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_xpnye")
+volume_db = -5.0
+bus = &"sfx"
 
 [node name="ColorRect" type="ColorRect" parent="."]
 anchors_preset = 15

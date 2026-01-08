@@ -102,6 +102,10 @@ pause={
 2d_physics/layer_4="EnemyCollistion"
 2d_physics/layer_5="PlayerPickup"
 
+[physics]
+
+common/physics_jitter_fix=0.0
+
 [rendering]
 
 textures/canvas_textures/default_texture_filter=0

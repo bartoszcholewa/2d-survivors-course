@@ -86,3 +86,30 @@ func animate_damage_flash() -> void:
 To trochę jak asynchroniczna pętla `for`, która w tle zmienia wartość zmiennej od A do B, nie blokując reszty kodu (nie używa `time.sleep()`, tylko działa w klatkach silnika).
 
 **Dokumentacja:** Klasa `SceneTreeTween` w Godot Docs.
+
+## Temat: Skróty w dostępie do węzłów - $ i %
+**Pytanie:** Czym różni się `$` od `%` w zapisie `@onready var count_label: Label = $%CountLabel`?
+
+**Odpowiedź:**
+Ten zapis łączy dwa mechanizmy Godota służące do nawigacji po drzewie sceny, poprawiając elastyczność i czytelność kodu.
+
+### 1. `$` (get_node) - Ścieżka Względna
+Znak dolara to skrót od funkcji `get_node()`. Pozwala na pobranie węzła na podstawie jego położenia w hierarchii.
+*   `$Label` -> szuka dziecka o nazwie "Label".
+*   `$UI/Container/Label` -> szuka węzła po konkretnej ścieżce.
+**Wada:** Jeśli zmienisz strukturę sceny (np. przeniesiesz Label do innego kontenera), ścieżka przestanie działać i kod wyrzuci błąd.
+
+### 2. `%` (Scene Unique Node) - Unikalna Nazwa
+Znak procenta odwołuje się do węzła oznaczonego w edytorze jako **"Access as Unique Name"** (Prawy Przycisk Myszy na węźle -> zaznacz tę opcję). Obok węzła pojawi się wtedy mała ikona `%`.
+*   Działa jak **ID w HTML**.
+*   Wyszukuje węzeł w obrębie obecnej sceny bez względu na to, jak głęboko jest schowany.
+*   **Zaleta:** Możesz dowolnie zmieniać strukturę sceny, a kod nadal będzie działał, dopóki węzeł znajduje się w tej samej scenie.
+
+### 3. Zapis `$%`
+Łączy oba symbole: `$%MyLabel` to skrót od `get_node("%MyLabel")`. Jest to "Złoty Standard" przy pracy z UI, gdzie hierarchia często się zmienia.
+
+### Pythonowa Analogia
+*   `$Path/To/Node` to jak szukanie w głęboko zagnieżdżonym słowniku: `data['UI']['Container']['Label']`.
+*   `%UniqueNode` to jak szukanie po kluczu w płaskiej mapie ID: `global_registry['Label']`.
+
+**Dobra Praktyka:** Używaj `%UniqueName` dla wszystkich elementów UI, do których odwołujesz się w skryptach. Dzięki temu Twój kod będzie odporny na refaktoryzację wizualną sceny.

@@ -1,0 +1,196 @@
+[gd_scene load_steps=17 format=3 uid="uid://menn83d3dahl"]
+
+[ext_resource type="Script" uid="uid://cd70vcj1wj7ye" path="res://scenes/ui/meta_upgrade_card.gd" id="1_3art6"]
+[ext_resource type="PackedScene" uid="uid://xvuquvvaxsw" path="res://scenes/component/random_stream_player_component.tscn" id="2_q2g8u"]
+[ext_resource type="AudioStream" uid="uid://biybh34xlstwl" path="res://assets/audio/switch1.ogg" id="3_85xxw"]
+[ext_resource type="AudioStream" uid="uid://dg61150vwoh2i" path="res://assets/audio/switch2.ogg" id="4_fru07"]
+[ext_resource type="AudioStream" uid="uid://bya2qurdkg03v" path="res://assets/audio/switch3.ogg" id="5_34nwv"]
+[ext_resource type="AudioStream" uid="uid://cmxx01iyaa7nx" path="res://assets/audio/switch4.ogg" id="6_jv31y"]
+[ext_resource type="AudioStream" uid="uid://644co8kduxr6" path="res://assets/audio/switch5.ogg" id="7_w6g5h"]
+[ext_resource type="AudioStream" uid="uid://vbgrogei3f8v" path="res://assets/audio/switch6.ogg" id="8_5muvj"]
+[ext_resource type="AudioStream" uid="uid://cb04njffmh8u7" path="res://assets/audio/switch7.ogg" id="9_waj3d"]
+[ext_resource type="AudioStream" uid="uid://bw4ca3d148uke" path="res://assets/audio/switch8.ogg" id="10_qfmqr"]
+[ext_resource type="AudioStream" uid="uid://cotjq6mnrw42j" path="res://assets/audio/switch9.ogg" id="11_cpo8x"]
+[ext_resource type="AudioStream" uid="uid://bycsp1opthq03" path="res://assets/audio/switch10.ogg" id="12_1hn27"]
+[ext_resource type="Texture2D" uid="uid://wnxps1w42l87" path="res://scenes/game_object/experience_vial/experience_vial.png" id="13_q2g8u"]
+
+[sub_resource type="Animation" id="Animation_m44y0"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:modulate")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [Color(1, 1, 1, 1)]
+}
+tracks/2/type = "value"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath(".:rotation")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_rxqlh"]
+resource_name = "selected"
+length = 0.2
+step = 0.05
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:scale")
+tracks/0/interp = 2
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.2),
+"transitions": PackedFloat32Array(1, 2.2191396, 1),
+"update": 0,
+"values": [Vector2(1, 1), Vector2(1.2, 1.2), Vector2(1, 1)]
+}
+tracks/1/type = "value"
+tracks/1/imported = false
+tracks/1/enabled = true
+tracks/1/path = NodePath(".:rotation")
+tracks/1/interp = 2
+tracks/1/loop_wrap = true
+tracks/1/keys = {
+"times": PackedFloat32Array(0, 0.05, 0.1, 0.2),
+"transitions": PackedFloat32Array(1, 1, 1, 1),
+"update": 0,
+"values": [0.0, -0.17453292519943295, 0.08726646259971647, 0.0]
+}
+tracks/2/type = "method"
+tracks/2/imported = false
+tracks/2/enabled = true
+tracks/2/path = NodePath("ClickPlayerComponent2")
+tracks/2/interp = 1
+tracks/2/loop_wrap = true
+tracks/2/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"values": [{
+"args": [],
+"method": &"play_random"
+}]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_c4j7u"]
+_data = {
+&"RESET": SubResource("Animation_m44y0"),
+&"selected": SubResource("Animation_rxqlh")
+}
+
+[node name="MetaUpgradeCard" type="PanelContainer" groups=["upgrade_card"]]
+custom_minimum_size = Vector2(170, 0)
+pivot_offset = Vector2(75, 75)
+script = ExtResource("1_3art6")
+
+[node name="ClickPlayerComponent2" parent="." instance=ExtResource("2_q2g8u")]
+streams = Array[AudioStream]([ExtResource("3_85xxw"), ExtResource("4_fru07"), ExtResource("5_34nwv"), ExtResource("6_jv31y"), ExtResource("7_w6g5h"), ExtResource("8_5muvj"), ExtResource("9_waj3d"), ExtResource("10_qfmqr"), ExtResource("11_cpo8x"), ExtResource("12_1hn27")])
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+libraries = {
+&"": SubResource("AnimationLibrary_c4j7u")
+}
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 12
+
+[node name="PanelContainer" type="PanelContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_type_variation = &"AlternatePanelContainer"
+
+[node name="NameLabel" type="Label" parent="MarginContainer/VBoxContainer/PanelContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_font_sizes/font_size = 22
+text = "Sword Speed"
+horizontal_alignment = 1
+vertical_alignment = 1
+autowrap_mode = 2
+
+[node name="DescriptionLabel" type="Label" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+theme_type_variation = &"BlueOutlineLabel"
+theme_override_font_sizes/font_size = 11
+text = "Increases sword attack rate by 10%."
+horizontal_alignment = 1
+autowrap_mode = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="MarginContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+theme_override_constants/separation = 0
+
+[node name="Label" type="Label" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 8
+theme_type_variation = &"BlueOutlineLabel"
+text = "50/200"
+horizontal_alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="MarginContainer/VBoxContainer/VBoxContainer"]
+layout_mode = 2
+mouse_filter = 2
+
+[node name="ProgressBar" type="ProgressBar" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+custom_minimum_size = Vector2(10, 10)
+layout_mode = 2
+max_value = 1.0
+value = 0.5
+show_percentage = false
+
+[node name="Control" type="Control" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="MarginContainer/VBoxContainer/VBoxContainer/MarginContainer/Control"]
+layout_mode = 0
+offset_left = -5.0
+offset_top = -4.0
+offset_right = 11.0
+offset_bottom = 12.0
+size_flags_horizontal = 0
+size_flags_vertical = 0
+texture = ExtResource("13_q2g8u")
+
+[node name="PurchaseButton" type="Button" parent="MarginContainer/VBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "Purchase"

@@ -74,10 +74,13 @@ func _get_spawn_position() -> Vector2:
 		# Calculate a random position on the circle circumference
 		spawn_position = player.global_position + (random_direction * SPAWN_RADIUS)
 		
+		# Protect spawning on top of collision by adding 20px ray offset
+		var additional_check_offset = random_direction * 20
+		
 		# Ray cast query - shoot ray from player position to dedicated enemy spawn
 		# position and return dictionary with all collisions.
 		var query_parameters = PhysicsRayQueryParameters2D.create(
-			player.global_position, spawn_position, 1
+			player.global_position, spawn_position + additional_check_offset, 1
 		)
 		var result = get_tree().root.world_2d.direct_space_state.intersect_ray(query_parameters)
 	

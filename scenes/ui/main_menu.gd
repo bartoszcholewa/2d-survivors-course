@@ -10,9 +10,13 @@ func _ready() -> void:
 	
 	
 func on_play_pressed() -> void:
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
 	get_tree().change_scene_to_file("res://scenes/main/main.tscn")
 	
 func on_options_pressed() -> void:
+	ScreenTransition.transition()
+	await ScreenTransition.transitioned_halfway
 	var options_menu_instance: Node = options_scene.instantiate()
 	add_child(options_menu_instance)
 	options_menu_instance.back_pressed.connect(on_options_back_pressed.bind(options_menu_instance))

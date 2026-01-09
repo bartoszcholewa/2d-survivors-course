@@ -8,6 +8,7 @@ extends PanelContainer
 @onready var count_label: Label = $%CountLabel
 
 var upgrade: MetaUpgrade
+var current_cost: float = 0.0
 
 func _ready() -> void:
 	purchase_button.pressed.connect(on_purchase_pressed)
@@ -27,13 +28,16 @@ func update_progress():
 		current_quantity = MetaProgression.save_data["meta_upgrades"][upgrade.id]["quantity"]
 		
 	var is_maxed = current_quantity >= upgrade.max_quantity
-	var percent = currency / upgrade.experience_cost
+	current_cost = upgrade.experience_cost
+	if current_quantity > 0:
+		current_cost = current_cost * (current_quantity + 1)
+	var percent = currency / current_cost
 	percent = min(percent, 1)
 	progress_bar.value = percent
 	purchase_button.disabled = percent < 1 || is_maxed
 	if is_maxed:
 		purchase_button.text = "MAX"
-	progress_label.text = str(int(currency)) + "/" + str(int(upgrade.experience_cost))
+	progress_label.text = str(int(currency)) + "/" + str(int(current_cost))
 	count_label.text = "x%d" % current_quantity
 
 
@@ -46,7 +50,7 @@ func on_purchase_pressed():
 	if not upgrade:
 		return
 	MetaProgression.add_meta_upgrade(upgrade)
-	MetaProgression.save_data["meta_upgrade_currency"] -= upgrade.experience_cost
+	MetaProgression.save_data["meta_upgrade_currency"] -= current_cost
 	MetaProgression.save()
 	get_tree().call_group("meta_upgrade_card", "update_progress")
 	$AnimationPlayer.play("selected")

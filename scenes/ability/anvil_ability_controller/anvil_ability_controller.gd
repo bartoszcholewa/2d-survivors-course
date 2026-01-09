@@ -21,6 +21,8 @@ func _on_timer_timeout():
 	var direction = Vector2.RIGHT.rotated(randf_range(0, TAU))
 	var additional_rotation_degrees = 360.0 / (anvil_count + 1)
 	var anvil_distance = randf_range(0, BASE_RANGE)
+	var sleeping: float = 0.55 - (anvil_count / 10.0)
+	
 	for i in anvil_count + 1:
 		
 		var adjusted_direction = direction.rotated(deg_to_rad(i * additional_rotation_degrees))
@@ -42,6 +44,8 @@ func _on_timer_timeout():
 		get_tree().get_first_node_in_group("foreground_layer").add_child(anvil_ability_instance)
 		anvil_ability_instance.global_position = spawn_position
 		anvil_ability_instance.hitbox_component.damage = BASE_DAMAGE
+		await get_tree().create_timer(sleeping).timeout
+
 	
 	
 func on_ability_upgrade_added(upgrade: AbilityUpgrade, current_upgrades: Dictionary):

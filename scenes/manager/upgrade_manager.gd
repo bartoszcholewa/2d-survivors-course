@@ -16,7 +16,7 @@ var upgrade_anvil_count = preload("res://resources/upgrades/anvil_count.tres")
 
 func _ready() -> void:
 	upgrade_pool.add_item(upgrade_axe, 10)
-	upgrade_pool.add_item(upgrade_anvil, 1000)
+	upgrade_pool.add_item(upgrade_anvil, 10)
 	upgrade_pool.add_item(upgrade_sword_rate, 10)
 	upgrade_pool.add_item(upgrade_sword_damage, 10)
 	upgrade_pool.add_item(upgrade_player_speed, 5)
@@ -29,7 +29,7 @@ func update_upgrade_pool(chosen_upgrade: AbilityUpgrade):
 	if chosen_upgrade.id == upgrade_axe.id:
 		upgrade_pool.add_item(upgrade_axe_damage, 10)
 	elif chosen_upgrade.id == upgrade_anvil.id:
-		upgrade_pool.add_item(upgrade_anvil_count, 1000)
+		upgrade_pool.add_item(upgrade_anvil_count, 5)
 
 func apply_upgrade(upgrade: AbilityUpgrade):
 	var has_upgrade = current_upgrades.has(upgrade.id)

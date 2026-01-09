@@ -30,6 +30,9 @@ var enemy_table = WeightedTable.new()
 
 var number_to_spawn: int = 1
 
+## The current number of active enemies in the scene.
+var active_enemy_count: int = 0
+
 
 func _ready() -> void:
 	enemy_table.add_item(basic_enemy_scene, 10)
@@ -109,9 +112,20 @@ func _spawn_enemy() -> void:
 		var entities_layer = get_tree().get_first_node_in_group("entities_layer")
 		entities_layer.add_child(enemy)
 		enemy.global_position = _get_spawn_position()
+		
+		# Increment count when enemy enters the world
+		active_enemy_count += 1
+		
+		# Connect to tree exited to decrement count automatically when freed
+		enemy.tree_exited.connect(_on_enemy_tree_exited)
 
-
+## Arena difficulty/second table:[br]
+## - 6 -  0:30min[br]
+## - 12 - 1:00min[br]
+## - 18 - 1:30min
 func _on_arena_difficulty_increased(arena_difficulty: int):
+
+	
 	var time_off = (0.1 / 12) * arena_difficulty
 	
 	# Dont go below 0.7s reduction (max 0.3s spawn time)
@@ -124,7 +138,10 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 	elif arena_difficulty == 18:
 		enemy_table.add_item(bat_enemy_scene, 8)
 		
-	if (arena_difficulty % 1) == 0:
+	if (arena_difficulty % 12) == 0:
 		number_to_spawn += 1
 
-	
+## Called whenever an enemy node is removed from the scene tree.
+func _on_enemy_tree_exited() -> void:
+	# Decrement count and ensure it bever drops below zero
+	active_enemy_count = max(active_enemy_count - 1, 0)

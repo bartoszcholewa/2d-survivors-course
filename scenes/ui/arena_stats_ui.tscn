@@ -1,0 +1,103 @@
+[gd_scene load_steps=2 format=3 uid="uid://cauh5xc1b8tb4"]
+
+[ext_resource type="Script" uid="uid://de47ju7jc1jeu" path="res://scenes/ui/arena_stats_ui.gd" id="1_oa7xr"]
+
+[node name="ArenaStatsUI" type="CanvasLayer"]
+script = ExtResource("1_oa7xr")
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+mouse_filter = 2
+theme_override_constants/margin_left = 8
+theme_override_constants/margin_top = 8
+theme_override_constants/margin_right = 8
+theme_override_constants/margin_bottom = 8
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 32
+
+[node name="TimeLeftContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="TimeLeftNameLabel" type="Label" parent="MarginContainer/HBoxContainer/TimeLeftContainer"]
+layout_mode = 2
+size_flags_horizontal = 0
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+text = "Time Left:"
+
+[node name="TimeLeftValueLabel" type="Label" parent="MarginContainer/HBoxContainer/TimeLeftContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "4:59"
+
+[node name="EnemyCountContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="EnemyCountNameLabel" type="Label" parent="MarginContainer/HBoxContainer/EnemyCountContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+text = "Enemies:"
+
+[node name="EnemyCountValueLabel" type="Label" parent="MarginContainer/HBoxContainer/EnemyCountContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "59"
+
+[node name="EnemySpawnPerSecondContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 8
+
+[node name="EnemySpawnPerSecondNameLabel" type="Label" parent="MarginContainer/HBoxContainer/EnemySpawnPerSecondContainer"]
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+text = "Spawn/s:"
+
+[node name="EnemySpawnPerSecondValueLabel" type="Label" parent="MarginContainer/HBoxContainer/EnemySpawnPerSecondContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 4
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.7529412, 0.79607844, 0.8627451, 1)
+theme_override_colors/font_outline_color = Color(0.24705882, 0.14901961, 0.19215687, 1)
+theme_override_constants/outline_size = 8
+theme_override_constants/shadow_outline_size = 0
+theme_override_font_sizes/font_size = 11
+text = "59"

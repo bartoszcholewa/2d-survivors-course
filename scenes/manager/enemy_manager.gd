@@ -28,6 +28,8 @@ var base_spawn_time = 0
 
 var enemy_table = WeightedTable.new()
 
+var number_to_spawn: int = 1
+
 
 func _ready() -> void:
 	enemy_table.add_item(basic_enemy_scene, 10)
@@ -98,14 +100,15 @@ func _get_spawn_position() -> Vector2:
 ## Handles the instantiation and positioning of the enemy.
 func _spawn_enemy() -> void:
 
-	var enemy_scene = enemy_table.pick_item()
-	# Instantiate and add to the scene tree
-	var enemy: Node2D = enemy_scene.instantiate() as Node2D
-	
-	# Adding to parent to avoid enemy moving along with the spawner's local transform
-	var entities_layer = get_tree().get_first_node_in_group("entities_layer")
-	entities_layer.add_child(enemy)
-	enemy.global_position = _get_spawn_position()
+	for i in number_to_spawn:
+		var enemy_scene = enemy_table.pick_item()
+		# Instantiate and add to the scene tree
+		var enemy: Node2D = enemy_scene.instantiate() as Node2D
+		
+		# Adding to parent to avoid enemy moving along with the spawner's local transform
+		var entities_layer = get_tree().get_first_node_in_group("entities_layer")
+		entities_layer.add_child(enemy)
+		enemy.global_position = _get_spawn_position()
 
 
 func _on_arena_difficulty_increased(arena_difficulty: int):
@@ -120,5 +123,8 @@ func _on_arena_difficulty_increased(arena_difficulty: int):
 		enemy_table.add_item(wizard_enemy_scene, 15)
 	elif arena_difficulty == 18:
 		enemy_table.add_item(bat_enemy_scene, 8)
+		
+	if (arena_difficulty % 1) == 0:
+		number_to_spawn += 1
 
 	
